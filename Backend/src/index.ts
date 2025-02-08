@@ -2,17 +2,29 @@ import { Hono } from 'hono'
 import z from "zod"
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
-import {sign,decode,verify} from 'hono/jwt'
+import { sign,  verify } from 'hono/jwt'
 
 const app = new Hono<{
   Bindings: {
     DATABASE_URL: string,
-    JWT_SECRET:string
+    JWT_SECRET: string
   }
 }>()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
+app.use("/api/v1/blog/*",async (c,next)=>{
+const header=c.req.header("authorization") || ""
+const token=header.split('')[1]
+const jwt=await verify(token,c.env.JWT_SECRET)
+if(jwt.id){
+  return c.json({
+    message:"User exists"
+  })
+} else{
+  return c.json({
+    message:"Invalid arguments"
+  })
+  
+}
 })
 
 app.post("api/v1/signup", async (c) => {
@@ -27,14 +39,7 @@ app.post("api/v1/signup", async (c) => {
     password: z.string().min(8)
   })
 
-  const { success } = userSchema.safeParse(body)
-
-  if (!success) {
-    return c.json({
-      message:"Invalid arguments"
-    })
-  }
-  else {
+  
     const user = await prisma.user.create({
       data: {
         name: userSchema.name,
@@ -43,12 +48,12 @@ app.post("api/v1/signup", async (c) => {
       }
     })
 
-    const token=sign({id:user.id},c.env.JWT_SECRET)
+    const token = await sign({ id: user.id }, c.env.JWT_SECRET)
     return c.json({
-      token:token
+      token: token
     })
-  }
   
+
 })
 
 app.post("/api/v1/signin", async (c) => {
@@ -63,7 +68,14 @@ app.post("/api/v1/signin", async (c) => {
     }
   })
   if (!user) {
-    return c.text("Invalid arguments")
+    return c.json({
+      message: "Invalid arguments"
+    })
+  } else {
+    const token = await sign({ id: user.id }, c.env.JWT_SECRET)
+    return c.json({
+      token: token
+    })
   }
 })
 

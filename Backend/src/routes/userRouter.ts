@@ -3,6 +3,9 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import {sign,verify} from 'hono/jwt'
 import z from "zod"
+import { signinInput, signupInput, SignupInput } from "@mayankaneja837/flownote-common";
+import { SigninInput } from "@mayankaneja837/flownote-common";
+
 export const userRouter=new Hono<{
     Bindings:{
         DATABASE_URL: string
@@ -16,13 +19,8 @@ userRouter.post("/signup", async (c) => {
   }).$extends(withAccelerate())
 
   const userSchema = await c.req.json()
-  const body = z.object({
-    name: z.string(),
-    email: z.string(),
-    password: z.string().min(8)
-  })
-
-  const { success } = body.safeParse(userSchema)
+  
+  const { success } = signupInput.safeParse(userSchema)
 
   if (!success) {
     return c.json({
@@ -52,6 +50,13 @@ userRouter.post("/signin", async (c) => {
     datasourceUrl:c.env.DATABASE_URL
   }).$extends(withAccelerate())
 
+  const {success}=signinInput.safeParse(body)
+  if(!success){
+    c.status(411)
+    return c.json({
+      message:"Inputs entered are incorrect"
+    })
+  }
   const user=await prisma.user.findFirst({
     where:{
       email:body.email,

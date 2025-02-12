@@ -3,8 +3,10 @@
   
  main="src/index.ts"
  [vars]
-  DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMzA1MTJlZDctYzE2OC00YTdiLWE3YTAtMmU0MDU1MjUzYzA4IiwidGVuYW50X2lkIjoiZDllYTEzNDIwZTQ4NjZlNTU5MTg3ZWRlMmM2NWZiZDQ2N2UxNzhhZjRjZDI1MDBkNjQxNTMyMGU4NjFhZTQ4YiIsImludGVybmFsX3NlY3JldCI6IjBlMDU0YzBiLThmZWQtNGViMy1hNzA5LTM2MTM2MWZkYmQ1YSJ9.TsG8JpTzpF714bfqvbwaeJ69vRDsNl-fHuexwXSAKU0"
+  DATABASE_URL=""
 
-  JWT_SECRET="MayankistheKing"
+  JWT_SECRET=""
+
+
 
  

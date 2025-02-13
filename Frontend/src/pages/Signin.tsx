@@ -1,5 +1,8 @@
 export const Signin=()=>{
     return <div>
-        Hello from Signin component
+        Hi from the sigin component
+        <div className="text-blue">
+            Tailwind Test
+        </div>
     </div>
 }

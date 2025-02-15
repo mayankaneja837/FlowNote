@@ -4,7 +4,7 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import {sign,verify} from 'hono/jwt'
 import z from "zod"
 import { signinInput, signupInput, SignupInput } from "@mayankaneja837/flownote-common";
-import { SigninInput } from "@mayankaneja837/flownote-common";
+
 
 export const userRouter=new Hono<{
     Bindings:{

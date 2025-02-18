@@ -10,11 +10,12 @@ dist/
 .idea/workspace.xml
 .idea/usage.statistics.xml
 .idea/shelf
+wrangler.toml
 
 # deps
 node_modules/
 .wrangler
-wrangler.toml
+
 
 # env
 .env
@@ -32,4 +33,5 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+
 

@@ -2,8 +2,7 @@ import { verify } from "hono/jwt";
 import { Hono } from "hono";
 import { Prisma, PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
-import { blogInput, BlogInput, blogUpdate } from "@mayankaneja837/flownote-common";
-import { BlogUpdate } from "@mayankaneja837/flownote-common";
+import { blogInput, blogUpdate } from "@mayankaneja837/flownote-common";
 
 export const blogRouter=new Hono<{
     Bindings:{
@@ -68,32 +67,41 @@ blogRouter.post('/submit',async (c)=>{
 })
 
 blogRouter.put("/update",async (c)=>{
-    
+
+
+    const body=await c.req.json()
+
     const prisma=new PrismaClient({
         datasourceUrl:c.env.DATABASE_URL
     }).$extends(withAccelerate())
 
-    const body=await c.req.json()
+    
     const {success}=blogUpdate.safeParse(body)
-    if(!success){
-        c.status(411)
-        return c.json({
-            message:"Inputs entered are incorrect"
-        })
-    }
-    await prisma.post.update({
-        where:{
-            id:body.id
-        },
-        data:{
-            title:body.title,
-            content:body.content
-        }
-    })
 
-    return c.json({
-        message:"Blog updated!"
-    })
+    try{
+        if(!success){
+            c.status(411)
+            return c.json({
+                message:"Inputs entered are incorrect"
+            })
+        }
+        await prisma.post.update({
+            where:{
+                id:body.id
+            },
+            data:{
+                title:body.title,
+                content:body.content
+            }
+        })
+    
+        return c.json({
+            message:"Blog updated!"
+        })
+    } catch(error){
+        console.log(error)
+    }
+    
 })
 
 blogRouter.get("/bulk",async(c)=>{

@@ -4,11 +4,11 @@ import { Quote } from "../components/Quote"
 
 
 export const Signup=()=>{
-    return <div className="grid grid-cols-2 "> 
+    return <div className="grid grid-cols-1 lg:grid-cols-2"> 
     <div>
-        <Auth />
+        <Auth type="signup"/>
     </div>
-    <div className="invisible md:visible">
+    <div >
     <Quote />
     </div>
         

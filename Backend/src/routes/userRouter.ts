@@ -1,47 +1,47 @@
 import { Hono } from "hono";
-import { PrismaClient } from "@prisma/client/edge";
+import {PrismaClient} from "@prisma/client/edge"
 import { withAccelerate } from "@prisma/extension-accelerate";
-import {sign,verify} from 'hono/jwt'
-import z from "zod"
-import { signinInput, signupInput, SignupInput } from "@mayankaneja837/flownote-common";
+import {sign } from 'hono/jwt'
+import { signupInput,signinInput} from "@mayankaneja837/flownote-common";
 
 
 export const userRouter=new Hono<{
-    Bindings:{
-        DATABASE_URL: string
-        JWT_SECRET:string
-    }
+  Bindings:{
+    DATABASE_URL:string,
+    JWT_SECRET:string
+  }
 }>()
 
-userRouter.post("/signup", async (c) => {
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL
+userRouter.post('/signup',async(c)=>{
+  const prisma=new PrismaClient({
+    datasourceUrl:c.env.DATABASE_URL
   }).$extends(withAccelerate())
 
-  const userSchema = await c.req.json()
-  
-  const { success } = signupInput.safeParse(userSchema)
+  const body=await c.req.json()
+  const success=signinInput.safeParse(body)
 
-  if (!success) {
-    return c.json({
-      message: "Invalid arguments"
-    })
-  }
-  else {
-    const user = await prisma.user.create({
-      data: {
-        name: userSchema.name,
-        email: userSchema.email,
-        password:userSchema.password
+  try{if(success){
+    const user=await prisma.user.create({
+      data:{
+        name:body.name,
+        email:body.email,
+        password:body.password
       }
     })
-    
-    const token = await sign({ id: user.id }, c.env.JWT_SECRET)
+    const jwt=await sign({id:user.id},c.env.JWT_SECRET)
     return c.json({
-      token: token
+      token:jwt
+    })
+
+  } else{
+    return c.json({
+      message:"Invalid arguments"
     })
   }
-
+  } catch(e){
+    console.log(e)
+  }
+  
 })
 
 userRouter.post("/signin", async (c) => {

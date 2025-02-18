@@ -5,14 +5,15 @@
     "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
-    "@mayankaneja837/flownote-common": "^1.0.0",
+    "@mayankaneja837/flownote-common": "^2.0.0",
     "@prisma/client": "^6.3.1",
-    "@prisma/extension-accelerate": "^1.2.1",
+    "@prisma/extension-accelerate": "^1.2.2",
+    "esbuild": "^0.25.0",
     "hono": "^4.6.20",
     "prisma": "^6.3.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
-    "wrangler": "^3.101.0"
+    "wrangler": "^3.109.1"
   }
 }

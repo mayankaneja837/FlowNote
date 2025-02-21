@@ -1,5 +1,5 @@
 export const Blog=()=>{
     return <div>
-        Blogs will be displayed here
+        Blogs with specific id will be displayed here
     </div>
 }

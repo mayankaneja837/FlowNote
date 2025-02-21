@@ -11,7 +11,7 @@ export const BlogCard = ({
     content,
     publishedDate
 }: BlogCardProps) => {
-    return <div className="flex flex-col  border border-slate-200 pb-4">
+    return <div className="p-4 flex flex-col border-b border-slate-200 pb-4">
         <div className="flex">
             <div>
                 <Avatar authorName={authorName} />
@@ -35,7 +35,7 @@ export const BlogCard = ({
             {title}
         </div>
         <div className="text-md font-thin">
-            {content.slice(0, 100) + "....."}
+            {content.slice(0, 200) + "....."}
         </div>
         <div className="pt-4">
             {`${Math.ceil(content.length / 100)} minute(s) read`}

@@ -4,6 +4,7 @@ import { Prisma, PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { blogInput, blogUpdate } from "@mayankaneja837/flownote-common";
 
+
 export const blogRouter=new Hono<{
     Bindings:{
         DATABASE_URL:string
@@ -23,14 +24,14 @@ blogRouter.use('/*',async (c,next)=>{
             c.set("userId" ,jwt.id as string)
             await next()
         } else{
-            c.status(411)
+            c.status(403)
             return c.json({
                 message:"User does not exist"
             })
         }
     } catch(e){
         console.log(e)
-        c.status(411)
+        c.status(401)
         return c.json({
             message:"Error while verifying the jwt"
         })
@@ -110,7 +111,19 @@ blogRouter.get("/bulk",async(c)=>{
         datasourceUrl:c.env.DATABASE_URL
     }).$extends(withAccelerate())
 
-    const blog=await prisma.post.findMany({})
+    const blog=await prisma.post.findMany({
+        select:{
+            title:true,
+            content:true,
+            id:true,
+            author:{
+                select:{
+                    name:true
+                }
+            }
+        }
+    })
+    
     return c.json({
         blog
     })
@@ -126,6 +139,15 @@ blogRouter.get("/:id",async (c)=>{
         const blog=await prisma.post.findFirst({
             where:{
                 id:id
+            }, select:{
+                id:true,
+                title:true,
+                content:true,
+                author:{
+                    select:{
+                        name:true
+                    }
+                }
             }
         })
         return c.json({

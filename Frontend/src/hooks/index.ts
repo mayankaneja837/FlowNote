@@ -5,31 +5,31 @@ import { BACKEND_URL } from "../config"
 
 
 export interface Blog {
-    "content":string,
-    "title":string,
-    "id":number,
-    "author":{
-        "name":string
+    "content": string,
+    "title": string,
+    "id": number,
+    "author": {
+        "name": string
     }
 }
 
-export const useBlog=({id}:{id:string})=>{
-    const [loading,setLoading]=useState(true)
-    const [blog,setBlog]=useState<Blog>()
+export const useBlog = ({ id }: { id: string }) => {
+    const [loading, setLoading] = useState(true)
+    const [blog, setBlog] = useState<Blog>()
 
-    useEffect(()=>{
-        const storeData=localStorage.getItem("token")
-        const token=storeData? JSON.parse(storeData).token :null
+    useEffect(() => {
+        const storeData = localStorage.getItem("token")
+        const token = storeData ? JSON.parse(storeData).token : null
 
-        axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
-            headers:{
-                Authorization:token || ""
+        axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
+            headers: {
+                Authorization: token || ""
             }
-        }).then(response=>{
+        }).then(response => {
             setBlog(response.data.blog)
             setLoading(false)
         })
-    },[id])
+    }, [id])
 
     return {
         loading,
@@ -38,15 +38,15 @@ export const useBlog=({id}:{id:string})=>{
 }
 export const useBlogs = () => {
     const [loading, setLoading] = useState(true)
-    const [blogs, setBlogs] = useState<Blog []>([])
+    const [blogs, setBlogs] = useState<Blog[]>([])
 
     useEffect(() => {
 
-        const storeData=localStorage.getItem("token")
-        const token=storeData? JSON.parse(storeData).token :null
-        axios.get(`${BACKEND_URL}/api/v1/blog/bulk`,{
-            headers:{
-                Authorization:token || ""
+        const storeData = localStorage.getItem("token")
+        const token = storeData ? JSON.parse(storeData).token : null
+        axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
+            headers: {
+                Authorization: token || ""
             }
         })
             .then(response => {

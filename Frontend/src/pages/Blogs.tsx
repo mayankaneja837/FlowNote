@@ -1,3 +1,4 @@
+
 import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
 import { BlogSkeleton } from "../components/BlogSkeleton"
@@ -6,12 +7,18 @@ export const Blogs = () => {
     const {loading,blogs}=useBlogs()
 
     if(loading){
-        return <div>
+        return <div className="flex justify-center">
+            <div>
+            <Appbar />
+            <div>
+            <BlogSkeleton />
            <BlogSkeleton />
            <BlogSkeleton />
            <BlogSkeleton />
            <BlogSkeleton />
-           <BlogSkeleton />
+            </div>
+           
+        </div>
         </div>
     }
     return <div>

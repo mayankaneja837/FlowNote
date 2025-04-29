@@ -10,8 +10,13 @@ export const Blog = () => {
         id: id || ""
     })
     if (loading) {
-        return <div>
+        return <div className="h-screen flex flex-col justify-center">
+            <div className="flex justify-center">
+
             Loading.....
+
+            </div>
+           
         </div>
     }
     return <div>

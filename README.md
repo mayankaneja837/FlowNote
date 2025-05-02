@@ -1,55 +1,48 @@
 # FlowNote
 
-FlowNote is a platform for creating, publishing, and reading blogs. It consists of a **Frontend** built with React, TypeScript, and Vite, and a **Backend** powered by Hono, Prisma, and Cloudflare Workers.
+FlowNote is a full-stack application designed to streamline note-taking and blogging. It consists of a backend built with TypeScript and Prisma, and a frontend built with React, TypeScript, and Vite.
 
----
+## Project Structure
 
-## Features
+The project is organized into the following directories:
 
-### Frontend
-- **React + TypeScript**: A modern frontend stack for building scalable and maintainable UI.
-- **TailwindCSS**: For styling the application with utility-first CSS.
-- **React Router**: For client-side routing.
-- **Axios**: For making API requests to the backend.
-- **Pages**:
-  - **Landing Page**: A simple introduction to FlowNote.
-  - **Signup/Signin**: User authentication pages.
-  - **Blogs**: View all blogs.
-  - **Blog**: View a single blog.
-  - **Publish**: Create and publish a new blog.
+- **Backend/**: Contains the server-side code, including API routes and database schema.
+- **Frontend/**: Contains the client-side code, including React components and pages.
+- **Common/**: Shared utilities and configurations used by both the backend and frontend.
 
-### Backend
-- **Hono Framework**: A lightweight web framework for building APIs.
-- **Prisma**: ORM for managing the PostgreSQL database.
-- **JWT Authentication**: Secure user authentication using JSON Web Tokens.
-- **Cloudflare Workers**: Serverless backend deployment.
-- **Endpoints**:
-  - **User**:
-    - `/signup`: Register a new user.
-    - `/signin`: Authenticate an existing user.
-  - **Blog**:
-    - `/submit`: Create a new blog.
-    - `/update`: Update an existing blog.
-    - `/bulk`: Fetch all blogs.
-    - `/:id`: Fetch a single blog by ID.
+## Backend
 
----
+### Setup
 
-## Installation
+1. Navigate to the `Backend/` directory:
+   ```bash
+   cd Backend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-### Prerequisites
-- Node.js (v18+)
-- PostgreSQL database
-- Cloudflare Workers CLI (`wrangler`)
+### Deployment
 
-### Clone the Repository
+To deploy the backend, run:
 ```bash
-git clone https://github.com/mayankaneja837/FlowNote.git
-cd FlowNote
+npm run deploy
 ```
 
-### Setup Frontend
-1. Navigate to the frontend directory:
+### Database
+
+The backend uses Prisma for database management. The schema is defined in `prisma/schema.prisma`, and migrations are stored in the `prisma/migrations/` directory.
+
+## Frontend
+
+### Setup
+
+1. Navigate to the `Frontend/` directory:
    ```bash
    cd Frontend
    ```
@@ -62,89 +55,25 @@ cd FlowNote
    npm run dev
    ```
 
-### Setup Backend
-1. Navigate to the backend directory:
-   ```bash
-   cd Backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Set up the database:
-   - Update the `DATABASE_URL` in your environment variables.
-   - Run Prisma migrations:
-     ```bash
-     npx prisma migrate dev
-     ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### ESLint Configuration
 
----
+The frontend uses ESLint for linting. To expand the ESLint configuration for production applications, follow the steps outlined in `Frontend/README.md`.
 
-## Deployment
+### Vite
 
-### Frontend
-1. Build the frontend:
-   ```bash
-   npm run build
-   ```
-2. Deploy the `dist` folder to your hosting provider.
+The frontend is powered by Vite, which provides fast development and build times. Configuration files include `vite.config.ts` and `tsconfig.app.json`.
 
-### Backend
-1. Deploy to Cloudflare Workers:
-   ```bash
-   npm run deploy
-   ```
+## Common
 
----
+The `Common/` directory contains shared configurations and utilities, such as TypeScript configurations and reusable code.
 
-## Project Structure
+## Contributing
 
-```
-FlowNote/
-├── Backend/          # Backend code
-│   ├── prisma/       # Prisma schema and migrations
-│   ├── src/          # Source code for backend
-│   └── package.json  # Backend dependencies
-├── Frontend/         # Frontend code
-│   ├── src/          # Source code for frontend
-│   ├── public/       # Static assets
-│   └── package.json  # Frontend dependencies
-└── common/           # Shared code (e.g., validation schemas)
-```
-
----
-
-## Environment Variables
-
-### Backend
-- `DATABASE_URL`: PostgreSQL connection string.
-- `JWT_SECRET`: Secret key for signing JWTs.
-
----
-
-## Scripts
-
-### Frontend
-- `npm run dev`: Start the development server.
-- `npm run build`: Build the frontend for production.
-- `npm run lint`: Run ESLint.
-
-### Backend
-- `npm run dev`: Start the backend in development mode.
-- `npm run deploy`: Deploy the backend to Cloudflare Workers.
-
----
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes and push the branch.
+4. Open a pull request.
 
 ## License
 
-This project is licensed under the ISC License.
-
----
-
-## Author
-
-Developed by **Mayank Aneja**.
+This project is licensed under the MIT License.

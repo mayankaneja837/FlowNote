@@ -42,3 +42,5 @@ FlowNote is a Notion-style blogging platform that lets users create, edit, and s
 ```bash
 git clone https://github.com/your-username/flownote.git
 cd flownote
+### 2. Install dependencies
+npm install

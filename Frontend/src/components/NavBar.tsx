@@ -25,7 +25,7 @@ export const NavBar=()=>{
             </Link>
             <Link to={"/signup"}>
             <div className="pt-2">
-               <button type="button" className="bg-black text-white cursor-pointer rounded-2xl p-2">Get Started</button>
+               <button type="button" className="bg-black text-white cursor-pointer rounded-4xl p-2">Get Started</button>
             </div>
             </Link>
             

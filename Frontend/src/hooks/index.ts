@@ -11,7 +11,7 @@ export interface Blog {
     "author": {
         "name": string
     },
-    "publishedAt":Date
+    "publishedAt":string
 }
 
 export const useBlog = ({ id }: { id: string }) => {

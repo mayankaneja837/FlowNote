@@ -12,7 +12,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                         {blog.title}
                     </div>
                     <div className="text-slate-500 pt-2">
-                        {blog.publishedAt.toLocaleDateString('en-GB',{
+                        {new Date(blog.publishedAt).toLocaleDateString('en-GB',{
                             day:"numeric",
                             month:"long",
                             year:"numeric"

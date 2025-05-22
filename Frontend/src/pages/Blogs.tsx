@@ -26,7 +26,11 @@ export const Blogs = () => {
     <div className="flex justify-center">
         <div>
             
-            {blogs.map(blog=> <BlogCard id={blog.id} authorName={blog.author.name || "Anonymous"} title={blog.title} content={blog.content} publishedAt={blog.publishedAt}
+            {blogs.map(blog=> <BlogCard id={blog.id} authorName={blog.author.name || "Anonymous"} title={blog.title} content={blog.content} publishedAt={blog.publishedAt.toLocaleString('en-GB',{
+                day:"numeric",
+                month:"long",
+                year:"numeric"
+            })}
             />)}
             
 

@@ -4,7 +4,7 @@ interface BlogCardProps {
     authorName: string,
     title: string,
     content: string,
-    publishedAt: string,
+    publishedDate:string
     id:number
 }
 export const BlogCard = ({
@@ -12,7 +12,7 @@ export const BlogCard = ({
     authorName,
     title,
     content,
-    publishedAt
+    publishedDate
 }: BlogCardProps) => {
     return <Link to={`/blog/${id}`}>
     <div className="p-4 flex flex-col border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer">
@@ -29,7 +29,7 @@ export const BlogCard = ({
                         <Circle />
                     </div>
                     <div className="pl-2 text-md flex justify-center">
-                        {publishedAt}
+                        {publishedDate}
                     </div>
                 </div>
 

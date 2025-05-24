@@ -8,7 +8,7 @@ export const Quote=()=>{
     </div>
 
     <div className="pt-2 text-xl font-semibold ">
-        Mayank Aneja
+        Xabi Alonso
     </div>
     <div className="text-gray-400">
         CEO,Acme Inc

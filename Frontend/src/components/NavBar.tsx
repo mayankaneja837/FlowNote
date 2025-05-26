@@ -4,13 +4,13 @@ export const NavBar=()=>{
     return <div className="flex justify-between  w-full border-b border-black pb-4">
 
         <Link to={"/"}>
-        <div className="flex flex-col justify-center pl-10 text-2xl cursor-pointer pt-4 font-bold font-serif">
+        <div className="flex flex-col justify-center pl-10 text-2xl cursor-pointer pt-4.75 font-bold font-serif">
             FlowNote
         </div>
         </Link>
 
         <div>
-        <div className="flex flex-row pr-10 space-x-6">
+        <div className="flex flex-row pr-10 space-x-6 pt-2">
             <div className="pt-4 cursor-pointer">
                 Our Story
             </div>
